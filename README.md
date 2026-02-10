@@ -1,5 +1,7 @@
 # JioTV Go 📺
 
+THIS PROJECT USES MPD INSTEAD OF M3U8, /channels endpoint doesnt work, WIP
+
 JioTV Go, an exciting project that allows you to stream Live TV channels on the web and IPTV. It's a web wrapper around the JioTV Android app, utilizing the same API to fetch and stream channels.
 
 Ready to dive in? Download the latest binary for your operating system from [here](https://github.com/FatGrizzly/jiotv_go/releases/latest), and explore the [documentation](https://jiotv_go.rabil.me/) to start your JioTV Go adventure! 🚀

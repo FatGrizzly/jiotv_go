@@ -172,11 +172,20 @@ func checkFieldExist(field string, check bool, c *fiber.Ctx) error {
 	return internalUtils.CheckFieldExist(c, field, check)
 }
 
+func parseStreamRequest(raw string) (string, string) {
+	format := "mpd"
+	if strings.HasSuffix(raw, ".m3u8") {
+		return strings.TrimSuffix(raw, ".m3u8"), "hls"
+	}
+	if strings.HasSuffix(raw, ".mpd") {
+		return strings.TrimSuffix(raw, ".mpd"), "mpd"
+	}
+	return raw, format
+}
+
 // LiveHandler handles the live channel stream route `/live/:id.m3u8`.
 func LiveHandler(c *fiber.Ctx) error {
-	id := c.Params("id")
-	// remove suffix .m3u8 if exists
-	id = strings.Replace(id, ".m3u8", "", 1)
+	id, format := parseStreamRequest(c.Params("id"))
 
 	// Check if this is a custom channel - serve directly for custom channels
 	if isCustomChannel(id) {
@@ -201,12 +210,29 @@ func LiveHandler(c *fiber.Ctx) error {
 		return internalUtils.InternalServerError(c, err)
 	}
 
-	// Check if liveResult.Bitrates.Auto is empty
-	if liveResult.Bitrates.Auto == "" {
+	hasHLS := liveResult.Bitrates.Auto != ""
+	hasMPD := liveResult.Mpd.Bitrates.Auto != "" || liveResult.Mpd.Result != ""
+	if !hasHLS && !hasMPD {
 		error_message := "No stream found for channel id: " + id + "Status: " + liveResult.Message
 		utils.Log.Println(error_message)
 		utils.Log.Println(liveResult)
 		return internalUtils.NotFoundError(c, error_message)
+	}
+
+	if format == "mpd" {
+		mpdURL := liveResult.Mpd.Bitrates.Auto
+		if mpdURL == "" {
+			mpdURL = liveResult.Mpd.Result
+		}
+		if mpdURL != "" {
+			codedURL, err := secureurl.EncryptURL(mpdURL)
+			if err != nil {
+				utils.Log.Println(err)
+				return internalUtils.ForbiddenError(c, err)
+			}
+			return c.Redirect("/render.mpd?auth="+codedURL, fiber.StatusFound)
+		}
+		format = "hls"
 	}
 	// quote url as it will be passed as a query parameter
 	// It is required to quote the url as it may contain special characters like ? and &
@@ -236,9 +262,7 @@ func LiveHandler(c *fiber.Ctx) error {
 // LiveQualityHandler handles the live channel stream route `/live/:quality/:id.m3u8`.
 func LiveQualityHandler(c *fiber.Ctx) error {
 	quality := c.Params("quality")
-	id := c.Params("id")
-	// remove suffix .m3u8 if exists
-	id = strings.Replace(id, ".m3u8", "", 1)
+	id, format := parseStreamRequest(c.Params("id"))
 
 	// Check if this is a custom channel - serve directly for custom channels
 	if isCustomChannel(id) {
@@ -269,6 +293,22 @@ func LiveQualityHandler(c *fiber.Ctx) error {
 	// Channels with following IDs output audio only m3u8 when quality level is enforced
 	if id == "1349" || id == "1322" {
 		quality = "auto"
+	}
+
+	if format == "mpd" {
+		mpdURL := internalUtils.SelectQuality(quality, liveResult.Mpd.Bitrates.Auto, liveResult.Mpd.Bitrates.High, liveResult.Mpd.Bitrates.Medium, liveResult.Mpd.Bitrates.Low)
+		if mpdURL == "" {
+			mpdURL = liveResult.Mpd.Result
+		}
+		if mpdURL != "" {
+			codedURL, err := secureurl.EncryptURL(mpdURL)
+			if err != nil {
+				utils.Log.Println(err)
+				return internalUtils.ForbiddenError(c, err)
+			}
+			return c.Redirect("/render.mpd?auth="+codedURL, fiber.StatusFound)
+		}
+		format = "hls"
 	}
 
 	// select quality level based on query parameter
@@ -528,9 +568,9 @@ func ChannelsHandler(c *fiber.Ctx) error {
 
 			var channelURL string
 			if quality != "" {
-				channelURL = fmt.Sprintf("%s/live/%s/%s.m3u8", hostURL, quality, channel.ID)
+				channelURL = hostURL + utils.BuildMPDPlayURL(quality, channel.ID)
 			} else {
-				channelURL = fmt.Sprintf("%s/live/%s.m3u8", hostURL, channel.ID)
+				channelURL = hostURL + utils.BuildMPDPlayURL("", channel.ID)
 			}
 			var channelLogoURL string
 			if strings.HasPrefix(channel.LogoURL, "http://") || strings.HasPrefix(channel.LogoURL, "https://") {
@@ -560,7 +600,7 @@ func ChannelsHandler(c *fiber.Ctx) error {
 	}
 
 	for i, channel := range apiResponse.Result {
-		apiResponse.Result[i].URL = fmt.Sprintf("%s/live/%s", hostURL, channel.ID)
+		apiResponse.Result[i].URL = hostURL + utils.BuildMPDPlayURL("", channel.ID)
 	}
 
 	return c.JSON(apiResponse)

@@ -99,18 +99,24 @@
         const controls = ui.getControls();
         const player = controls.getPlayer();
 
-        player.configure({
-          drm: {
-            servers: {
-              "com.widevine.alpha": "{{ .license_url }}",
-            },
-            advanced: {
-              "com.widevine.alpha": {
-                videoRobustness: "SW_SECURE_CRYPTO",
-                audioRobustness: "SW_SECURE_CRYPTO",
+        const licenseUrl = "{{ .license_url }}";
+        if (licenseUrl) {
+          player.configure({
+            drm: {
+              servers: {
+                "com.widevine.alpha": licenseUrl,
+              },
+              advanced: {
+                "com.widevine.alpha": {
+                  videoRobustness: "SW_SECURE_CRYPTO",
+                  audioRobustness: "SW_SECURE_CRYPTO",
+                },
               },
             },
-          },
+          });
+        }
+
+        player.configure({
           streaming: {
             retryParameters: {
               maxAttempts: 3,
@@ -130,10 +136,16 @@
               request.uris[0].includes("/render.dash")
             ) {
               const newUrl = new URL(request.uris[0]);
-              // add query params host and path
+              // add query params host and path if missing
               const channelHost = "{{ .channel_host }}";
               const channelPath = "{{ .channel_path }}";
-              if (channelHost !== "" && channelPath !== "") {
+              if (
+                channelHost !== "" &&
+                channelPath !== "" &&
+                !newUrl.pathname.includes("/render.dash/host/") &&
+                !newUrl.searchParams.has("host") &&
+                !newUrl.searchParams.has("path")
+              ) {
                 newUrl.searchParams.append("host", channelHost);
                 newUrl.searchParams.append("path", channelPath);
               }

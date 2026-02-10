@@ -517,3 +517,10 @@ func BuildHLSPlayURL(quality, channelID string) string {
 	}
 	return fmt.Sprintf("/live/%s.m3u8", channelID)
 }
+
+func BuildMPDPlayURL(quality, channelID string) string {
+	if quality != "" {
+		return fmt.Sprintf("/live/%s/%s.mpd", quality, channelID)
+	}
+	return fmt.Sprintf("/live/%s.mpd", channelID)
+}

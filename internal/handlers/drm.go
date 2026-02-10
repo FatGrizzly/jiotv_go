@@ -10,11 +10,11 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/proxy"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/headers"
-	internalUtils "github.com/jiotv-go/jiotv_go/v3/internal/utils"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/secureurl"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/television"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/headers"
+	internalUtils "github.com/FatGrizzly/jiotv_go/v3/internal/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/secureurl"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/television"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 	"github.com/valyala/fasthttp"
 )
 

@@ -7,10 +7,10 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/proxy"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/urls"
-	internalUtils "github.com/jiotv-go/jiotv_go/v3/internal/utils"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/epg"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/urls"
+	internalUtils "github.com/FatGrizzly/jiotv_go/v3/internal/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/epg"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 )
 
 const (

@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/jiotv-go/jiotv_go/v3/internal/config"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/television"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/config"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/television"
 	"github.com/valyala/fasthttp"
 )
 

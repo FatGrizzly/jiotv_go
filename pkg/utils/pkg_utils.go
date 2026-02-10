@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/headers"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/store"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/headers"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/store"
 	"github.com/valyala/fasthttp"
 )
 

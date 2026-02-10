@@ -1,4 +1,4 @@
-module github.com/jiotv-go/jiotv_go/v3
+module github.com/FatGrizzly/jiotv_go/v3
 
 go 1.25
 

@@ -3,8 +3,8 @@ package television
 import (
 	"fmt"
 
-	"github.com/jiotv-go/jiotv_go/v3/pkg/secureurl"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/secureurl"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 )
 
 // EncryptedURLConfig holds configuration for URL encryption with auth parameters

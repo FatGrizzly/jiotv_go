@@ -8,7 +8,7 @@ import (
 	"sync"
 	"testing"
 
-	"github.com/jiotv-go/jiotv_go/v3/pkg/store"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/store"
 )
 
 var (

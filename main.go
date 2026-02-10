@@ -6,11 +6,11 @@ import (
 	"os"
 	"time"
 
-	"github.com/jiotv-go/jiotv_go/v3/cmd"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/secureurl"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/store"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/cmd"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/secureurl"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/store"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 
 	"github.com/urfave/cli/v2"
 )
@@ -27,7 +27,7 @@ func main() {
 		Usage:     "Stream JioTV on any device",
 		HelpName:  "jiotv_go",
 		Version:   version,
-		Copyright: "© JioTV Go (https://github.com/jiotv-go/jiotv_go)",
+		Copyright: "© JioTV Go (https://github.com/FatGrizzly/jiotv_go)",
 		Compiled:  time.Now(),
 		Suggest:   true,
 		Flags: []cli.Flag{

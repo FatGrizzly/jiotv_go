@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/jiotv-go/jiotv_go/v3/internal/config"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/config"
 	"gopkg.in/yaml.v3"
 )
 

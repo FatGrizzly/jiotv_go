@@ -4,7 +4,7 @@ import (
 	"testing"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 )
 
 func TestLoginSendOTPHandler(t *testing.T) {

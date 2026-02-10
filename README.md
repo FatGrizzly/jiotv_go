@@ -2,7 +2,7 @@
 
 JioTV Go, an exciting project that allows you to stream Live TV channels on the web and IPTV. It's a web wrapper around the JioTV Android app, utilizing the same API to fetch and stream channels.
 
-Ready to dive in? Download the latest binary for your operating system from [here](https://github.com/jiotv-go/jiotv_go/releases/latest), and explore the [documentation](https://jiotv_go.rabil.me/) to start your JioTV Go adventure! 🚀
+Ready to dive in? Download the latest binary for your operating system from [here](https://github.com/FatGrizzly/jiotv_go/releases/latest), and explore the [documentation](https://jiotv_go.rabil.me/) to start your JioTV Go adventure! 🚀
 
 _Give us 🌟 on GitHub if you like this project!_
 
@@ -36,6 +36,7 @@ Get Started with JioTV Go by following the [Get Started](https://jiotv_go.rabil.
   - [Join the community on Telegram:](#join-the-community-on-telegram)
   - [Star History](#star-history)
   - [Contributors](#contributors)
+  - [Credits](#credits)
   - [Let's Make JioTV Go Better Together! 🤝](#lets-make-jiotv-go-better-together-)
     - [**Report Bugs**](#report-bugs)
     - [**Ready to Contribute? Join the Journey! 🚀**](#ready-to-contribute-join-the-journey-)
@@ -53,23 +54,27 @@ The complete documentation for JioTV Go is available at https://jiotv_go.rabil.m
 
 ## Star History
 
-<a href="https://star-history.com/#jiotv-go/jiotv_go&Date">
+<a href="https://star-history.com/#FatGrizzly/jiotv_go&Date">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=jiotv-go/jiotv_go&type=Date&theme=dark" />
-    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=jiotv-go/jiotv_go&type=Date" />
-    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=jiotv-go/jiotv_go&type=Date" />
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/svg?repos=FatGrizzly/jiotv_go&type=Date&theme=dark" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/svg?repos=FatGrizzly/jiotv_go&type=Date" />
+    <img alt="Star History Chart" src="https://api.star-history.com/svg?repos=FatGrizzly/jiotv_go&type=Date" />
   </picture>
 </a>
 
 ## Contributors
 
-[![Contributors](https://contributors-img.web.app/image?repo=jiotv-go/jiotv_go)](https://github.com/jiotv-go/jiotv_go/graphs/contributors)
+[![Contributors](https://contributors-img.web.app/image?repo=FatGrizzly/jiotv_go)](https://github.com/FatGrizzly/jiotv_go/graphs/contributors)
+
+## Credits
+
+Original project by [JioTV-Go](https://github.com/JioTV-Go/jiotv_go).
 
 ## Let's Make JioTV Go Better Together! 🤝
 
 ### **Report Bugs**
 
-Found a pesky bug? No worries! Please help us improve JioTV Go by creating an issue [here](https://github.com/jiotv-go/jiotv_go/issues/new/choose). Be sure to include detailed steps to reproduce the bug, describe the expected behavior, and, if possible, attach screenshots. Your feedback is invaluable!
+Found a pesky bug? No worries! Please help us improve JioTV Go by creating an issue [here](https://github.com/FatGrizzly/jiotv_go/issues/new/choose). Be sure to include detailed steps to reproduce the bug, describe the expected behavior, and, if possible, attach screenshots. Your feedback is invaluable!
 
 ### **Ready to Contribute? Join the Journey! 🚀**
 

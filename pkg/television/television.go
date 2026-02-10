@@ -10,11 +10,11 @@ import (
 	"github.com/valyala/fasthttp"
 	"gopkg.in/yaml.v3"
 
-	"github.com/jiotv-go/jiotv_go/v3/internal/config"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/headers"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/urls"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/config"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/headers"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/urls"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 )
 
 const (

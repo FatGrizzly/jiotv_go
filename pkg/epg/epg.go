@@ -12,11 +12,11 @@ import (
 	"sync"
 	"time"
 
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/headers"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/tasks"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/urls"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/scheduler"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/utils"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/headers"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/tasks"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/urls"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/scheduler"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
 	"github.com/schollz/progressbar/v3"
 	"github.com/valyala/fasthttp"
 )

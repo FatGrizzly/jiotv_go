@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/jiotv-go/jiotv_go/v3/pkg/epg"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/epg"
 )
 
 // GenEPG generates a new epg.xml.gz file with updated EPG data by first deleting any existing epg.xml.gz file.

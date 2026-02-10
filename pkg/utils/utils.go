@@ -17,10 +17,10 @@ import (
 
 	"gopkg.in/natefinch/lumberjack.v2"
 
-	"github.com/jiotv-go/jiotv_go/v3/internal/config"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/headers"
-	"github.com/jiotv-go/jiotv_go/v3/internal/constants/urls"
-	"github.com/jiotv-go/jiotv_go/v3/pkg/store"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/config"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/headers"
+	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/urls"
+	"github.com/FatGrizzly/jiotv_go/v3/pkg/store"
 	"github.com/valyala/fasthttp"
 	"github.com/valyala/fasthttp/fasthttpproxy"
 )

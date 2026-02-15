@@ -415,8 +415,8 @@ func getCustomChannels() []Channel {
 
 // Channels fetch channels from JioTV API and merge with custom channels
 func Channels() (ChannelsResponse, error) {
-	// Create a fasthttp.Client
-	client := utils.GetRequestClient()
+	// Create a fasthttp.Client without proxy for channel listing
+	client := utils.GetDirectRequestClient()
 
 	// Set up request headers
 	requestHeaders := map[string]string{
@@ -450,7 +450,7 @@ func Channels() (ChannelsResponse, error) {
 	}
 
 	// disable sony channels temporarily
-	// apiResponse.Result = append(apiResponse.Result, SONY_CHANNELS_API...)
+	apiResponse.Result = append(apiResponse.Result, SONY_CHANNELS_API...)
 
 	// Load and append custom channels if configured
 	if config.Cfg.CustomChannelsFile != "" {

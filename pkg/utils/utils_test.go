@@ -383,6 +383,24 @@ func TestGetRequestClient(t *testing.T) {
 	}
 }
 
+func TestGetDirectRequestClient(t *testing.T) {
+	tests := []struct {
+		name string
+	}{
+		{
+			name: "Get direct HTTP client",
+		},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			got := GetDirectRequestClient()
+			if got == nil {
+				t.Errorf("GetDirectRequestClient() returned nil")
+			}
+		})
+	}
+}
+
 func TestFileExists(t *testing.T) {
 	type args struct {
 		filename string

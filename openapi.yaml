@@ -1,0 +1,281 @@
+openapi: 3.0.3
+info:
+  title: JioTV Upstream API (observed)
+  version: "1.0.0"
+  description: |
+    Extracted from hardcoded URLs in the repository. Some playback/DRM URLs are
+    provided by upstream responses and are not directly hardcoded.
+
+servers:
+  - url: https://jiotvapi.media.jio.com
+    description: JioTV API (media)
+  - url: https://auth.media.jio.com
+    description: Auth media
+  - url: https://tv.media.jio.com
+    description: TV media
+  - url: https://jiotvapi.cdn.jio.com
+    description: JioTV API CDN
+  - url: https://jiotv.data.cdn.jio.com
+    description: JioTV data CDN
+  - url: https://jiotv.catchup.cdn.jio.com
+    description: JioTV catchup CDN
+  - url: https://lin-gd-001-cf.slivcdn.com
+    description: SonyLiv CDN (partner)
+
+tags:
+  - name: auth
+  - name: channels
+  - name: playback
+  - name: epg
+  - name: images
+  - name: partner
+
+paths:
+  /userservice/apis/v1/loginotp/send:
+    post:
+      tags: [auth]
+      summary: Send OTP for login
+      parameters:
+        - in: header
+          name: appname
+          schema: { type: string }
+        - in: header
+          name: os
+          schema: { type: string }
+        - in: header
+          name: devicetype
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number:
+                  type: string
+                  description: Base64-encoded mobile number
+      responses:
+        "204": { description: No Content }
+
+  /userservice/apis/v1/loginotp/verify:
+    post:
+      tags: [auth]
+      summary: Verify OTP for login
+      parameters:
+        - in: header
+          name: appname
+          schema: { type: string }
+        - in: header
+          name: os
+          schema: { type: string }
+        - in: header
+          name: devicetype
+          schema: { type: string }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                number: { type: string, description: Base64-encoded mobile number }
+                otp: { type: string }
+                deviceInfo: { type: object }
+      responses:
+        "200": { description: OK }
+
+  /tokenservice/apis/v1/refreshtoken:
+    post:
+      tags: [auth]
+      summary: Refresh access token
+      parameters:
+        - in: query
+          name: langId
+          schema: { type: string, example: "6" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appName: { type: string }
+                deviceId: { type: string }
+                refreshToken: { type: string }
+      responses:
+        "200": { description: OK }
+
+  /apis/v2.0/loginotp/refresh:
+    get:
+      tags: [auth]
+      summary: Refresh SSO token
+      parameters:
+        - in: query
+          name: langId
+          schema: { type: string, example: "6" }
+      responses:
+        "200": { description: OK }
+
+  /tokenservice/apis/v1/logout:
+    post:
+      tags: [auth]
+      summary: Server-side logout
+      parameters:
+        - in: query
+          name: langId
+          schema: { type: string, example: "6" }
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                appName: { type: string }
+                deviceId: { type: string }
+                refreshToken: { type: string }
+      responses:
+        "200": { description: OK }
+
+  /apis/v3.0/getMobileChannelList/get/:
+    get:
+      tags: [channels]
+      summary: Channel list (CDN)
+      parameters:
+        - in: query
+          name: langId
+          schema: { type: string, example: "6" }
+        - in: query
+          name: os
+          schema: { type: string, example: "android" }
+        - in: query
+          name: devicetype
+          schema: { type: string, example: "phone" }
+        - in: query
+          name: usertype
+          schema: { type: string, example: "JIO" }
+        - in: query
+          name: version
+          schema: { type: string, example: "315" }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://jiotvapi.cdn.jio.com
+
+  /apis/v3.0/getMobileChannelList/get/:
+    get:
+      tags: [channels]
+      summary: Channel list (data CDN)
+      parameters:
+        - in: query
+          name: os
+          schema: { type: string, example: "android" }
+        - in: query
+          name: devicetype
+          schema: { type: string, example: "phone" }
+        - in: query
+          name: usertype
+          schema: { type: string, example: "tvYR7NSNn7rymo3F" }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://jiotv.data.cdn.jio.com
+
+  /apis/v1.3/getepg/get/:
+    get:
+      tags: [epg]
+      summary: EPG for channel/offset
+      parameters:
+        - in: query
+          name: offset
+          schema: { type: integer }
+        - in: query
+          name: channel_id
+          schema: { type: integer }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://jiotv.data.cdn.jio.com
+
+  /playback/apis/v1.1/geturl:
+    post:
+      tags: [playback]
+      summary: Get playback URL
+      parameters:
+        - in: query
+          name: langId
+          schema: { type: string, example: "6" }
+      requestBody:
+        required: true
+        content:
+          application/x-www-form-urlencoded:
+            schema:
+              type: object
+              properties:
+                channel_id: { type: string }
+                stream_type: { type: string, example: "Seek" }
+                begin: { type: string }
+                srno: { type: string }
+      responses:
+        "200": { description: OK }
+
+  /dare_images/images/{file}:
+    get:
+      tags: [images]
+      summary: Channel image
+      parameters:
+        - in: path
+          name: file
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://jiotv.catchup.cdn.jio.com
+
+  /dare_images/shows/{file}:
+    get:
+      tags: [images]
+      summary: EPG poster (file)
+      parameters:
+        - in: path
+          name: file
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://jiotv.catchup.cdn.jio.com
+
+  /dare_images/shows/{date}/{file}:
+    get:
+      tags: [images]
+      summary: EPG poster (date/file)
+      parameters:
+        - in: path
+          name: date
+          required: true
+          schema: { type: string }
+        - in: path
+          name: file
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://jiotv.catchup.cdn.jio.com
+
+  /{path}:
+    get:
+      tags: [partner]
+      summary: SonyLiv CDN proxy target
+      parameters:
+        - in: path
+          name: path
+          required: true
+          schema: { type: string }
+      responses:
+        "200": { description: OK }
+      servers:
+        - url: https://lin-gd-001-cf.slivcdn.com

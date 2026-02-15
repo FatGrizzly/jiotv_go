@@ -84,7 +84,7 @@ func New(credentials *utils.JIOTV_CREDENTIALS) *Television {
 	}
 
 	// Create a fasthttp.Client
-	client := utils.GetRequestClient()
+	client := utils.GetDirectRequestClient()
 
 	// Return a new Television instance
 	return &Television{
@@ -416,7 +416,7 @@ func getCustomChannels() []Channel {
 // Channels fetch channels from JioTV API and merge with custom channels
 func Channels() (ChannelsResponse, error) {
 	// Create a fasthttp.Client
-	client := utils.GetRequestClient()
+	client := utils.GetDirectRequestClient()
 
 	// Set up request headers
 	requestHeaders := map[string]string{
@@ -666,7 +666,7 @@ func getSLChannel(channelID string) (*LiveURLOutput, error) {
 		defer fasthttp.ReleaseResponse(resp)
 
 		// Perform the HTTP GET request
-		if err := utils.GetRequestClient().Do(req, resp); err != nil {
+		if err := utils.GetDirectRequestClient().Do(req, resp); err != nil {
 			utils.Log.Panic(err)
 		}
 

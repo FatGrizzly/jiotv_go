@@ -465,6 +465,16 @@ func GetRequestClient() *fasthttp.Client {
 	}
 }
 
+// GetDirectRequestClient returns a fasthttp.Client without proxy
+// This is used for requests that should bypass the configured proxy
+func GetDirectRequestClient() *fasthttp.Client {
+	return &fasthttp.Client{
+		Dial: fasthttp.DialFunc(func(addr string) (netConn net.Conn, err error) {
+			return fasthttp.DialDualStackTimeout(addr, 5*time.Second)
+		}),
+	}
+}
+
 // FileExists function check if given file exists
 func FileExists(filename string) bool {
 	// check if given file exists

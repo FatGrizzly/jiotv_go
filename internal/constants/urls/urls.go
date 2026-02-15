@@ -23,8 +23,8 @@ const (
 	RefreshSSOTokenURL = "https://tv.media.jio.com/apis/v2.0/loginotp/refresh?langId=6"
 
 	// Channel listing URLs
-	ChannelsAPIURL = "https://jiotv.v4.ax/api/mobileA"
-	ChannelURL     = "https://jiotv.v4.ax/api/mobileB"
+	ChannelsAPIURL = "https://jiotvapi.cdn.jio.com/apis/v3.0/getMobileChannelList/get/?langId=6&os=android&devicetype=phone&usertype=JIO&version=315&langId=6"
+	ChannelURL     = "https://jiotv.data.cdn.jio.com/apis/v3.0/getMobileChannelList/get/?os=android&devicetype=phone&usertype=tvYR7NSNn7rymo3F"
 
 	// EPG URLs
 	EPGURL            = "https://jiotv.data.cdn.jio.com/apis/v1.3/getepg/get/?offset=%d&channel_id=%d"

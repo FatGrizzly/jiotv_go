@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/fiber/v2/middleware/proxy"
 	"github.com/FatGrizzly/jiotv_go/v3/internal/constants/headers"
 	internalUtils "github.com/FatGrizzly/jiotv_go/v3/internal/utils"
 	"github.com/FatGrizzly/jiotv_go/v3/pkg/secureurl"
 	"github.com/FatGrizzly/jiotv_go/v3/pkg/television"
 	"github.com/FatGrizzly/jiotv_go/v3/pkg/utils"
+	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/proxy"
 	"github.com/valyala/fasthttp"
 )
 
@@ -156,7 +156,7 @@ func DRMKeyHandler(c *fiber.Ctx) error {
 	}
 
 	// Make a HEAD request to the decoded_channel to get the cookies
-	client := utils.GetRequestClient()
+	client := utils.GetDirectRequestClient()
 	req := fasthttp.AcquireRequest()
 	defer fasthttp.ReleaseRequest(req)
 
@@ -208,7 +208,7 @@ func DRMKeyHandler(c *fiber.Ctx) error {
 	c.Request().Header.Del("Accept")
 	c.Request().Header.Del("Origin")
 
-	if err := proxy.Do(c, decoded_url, TV.Client); err != nil {
+	if err := proxy.Do(c, decoded_url, utils.GetDirectRequestClient()); err != nil {
 		return err
 	}
 

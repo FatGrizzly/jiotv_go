@@ -41,7 +41,7 @@ func Init() {
 	var lastModTime time.Time
 	flag := false
 	utils.Log.Println("Checking EPG file")
-
+	
 	// Check file existence and get file info
 	fileResult := utils.CheckAndReadFile(epgFile)
 	if fileResult.Exists {
@@ -125,9 +125,8 @@ func NewProgramme(channelID int, start, stop, title, desc, category, iconSrc str
 
 // genXML generates XML EPG from JioTV API and returns it as a byte slice.
 func genXML() ([]byte, error) {
-	// Create clients: proxy-aware for EPG fetch, direct for channel list fetch
+	// Create a reusable fasthttp client with common headers
 	client := utils.GetRequestClient()
-	directClient := utils.GetDirectRequestClient()
 
 	// Create channels and programmes slices with initial capacity
 	var channels []Channel
@@ -175,7 +174,7 @@ func genXML() ([]byte, error) {
 	resp, err := utils.MakeHTTPRequest(utils.HTTPRequestConfig{
 		URL:    CHANNEL_URL,
 		Method: "GET",
-	}, directClient)
+	}, client)
 	if err != nil {
 		return nil, utils.LogAndReturnError(err, "Failed to fetch channels")
 	}

@@ -83,8 +83,8 @@ func New(credentials *utils.JIOTV_CREDENTIALS) *Television {
 		"versionCode":     headers.VersionCode389,
 	}
 
-	// Create a fasthttp.Client without proxy for channel listing
-	client := utils.GetDirectRequestClient()
+	// Create a fasthttp.Client
+	client := utils.GetRequestClient()
 
 	// Return a new Television instance
 	return &Television{

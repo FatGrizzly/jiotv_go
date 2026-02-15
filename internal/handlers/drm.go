@@ -156,7 +156,7 @@ func DRMKeyHandler(c *fiber.Ctx) error {
 	}
 
 	// Make a HEAD request to the decoded_channel to get the cookies
-	client := utils.GetDirectRequestClient()
+	client := utils.GetRequestClient()
 	req := fasthttp.AcquireRequest()
 	defer fasthttp.ReleaseRequest(req)
 
@@ -208,6 +208,7 @@ func DRMKeyHandler(c *fiber.Ctx) error {
 	c.Request().Header.Del("Accept")
 	c.Request().Header.Del("Origin")
 
+	// Use direct client (no proxy) for license key requests to tv.media.jio.com
 	if err := proxy.Do(c, decoded_url, utils.GetDirectRequestClient()); err != nil {
 		return err
 	}
